@@ -100,12 +100,12 @@ class GUI:
         self.header = Frame(self.Window, bg="#042F2A")
         self.header.place(relwidth=1)
         self.labelHead = Label(self.header,
-                             bg = "#042F2A",
-                              fg = "white",
-                              text = self.name ,
-                               font = "Helvetica 14 bold",
-                               width = 5,
-                               pady = 5)
+                            bg = "#042F2A",
+                            fg = "white",
+                            text = self.name ,
+                            font = "Helvetica 14 bold",
+                            width = 20,
+                            pady = 5)
         self.labelHead.pack(side=LEFT)
         
         self.participants = Button(self.header,
