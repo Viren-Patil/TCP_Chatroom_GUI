@@ -18,6 +18,8 @@ server_port = int(sys.argv[1])
 # Connecting the client socket to the server socket.
 clientSocket.connect((server_host, server_port))
 
+chatParticipants = []
+
 # GUI class for the chat
 class GUI:
     # constructor method
@@ -48,7 +50,7 @@ class GUI:
         self.pls.place(relwidth=1, rely=0.2)
          
         # create a entry box for
-        # tyoing the message
+        # typing the message
         self.entryName = Entry(self.login,
                              font = "Helvetica 14",
                              bg="#042F2A",
@@ -144,8 +146,14 @@ class GUI:
          
         self.labelBottom.place(relwidth = 1,
                                rely = 0.875)
-         
-        self.entryMsg = Entry(self.labelBottom,
+                               
+        self.entryFrame = Frame(self.labelBottom, bg="#042F2A")
+        self.entryFrame.place(relwidth = 0.74,
+                            relheight = 0.06,
+                            rely = 0.008,
+                            relx = 0.011)
+
+        self.entryMsg = Entry(self.entryFrame,
                               bg = "#042F2A",
                               fg = "white",
                               font = "Helvetica 13",
@@ -154,10 +162,10 @@ class GUI:
          
         # place the given widget
         # into the gui window
-        self.entryMsg.place(relwidth = 0.74,
-                            relheight = 0.06,
+        self.entryMsg.place(relwidth = 0.957,
+                            relheight = 1,
                             rely = 0.008,
-                            relx = 0.011)
+                            relx = 0.021)
          
         self.entryMsg.focus()
          
@@ -214,8 +222,10 @@ class GUI:
         mainframe2 = Frame(canvas)
         canvas.create_window((100,0), window=mainframe2, anchor="nw")
 
-        for k in range(1, 100):
-            btn = Label(mainframe2, text=f"Person {k}", font="Helvetica 13 bold", bg="#042F2A", fg="white", width=20, pady=10)
+        for k in chatParticipants:
+            if k == self.name:
+                k = "You"
+            btn = Label(mainframe2, text=k, font="Helvetica 13 bold", bg="#042F2A", fg="white", width=20, pady=10)
             btn.pack()
 
     # A function to start the thread for sending messages
@@ -231,6 +241,7 @@ class GUI:
     def sendMsgs(self, clientSocket):
         self.textCons.config(state=DISABLED)
         while True:
+            # message = self.name + ': ' + self.msg + "$NORM"
             message = self.name + ': ' + self.msg
             clientSocket.send(message.encode())
             break
@@ -240,21 +251,44 @@ class GUI:
         while True: 
             try:
                 # This code is executed when the server sends a message to the client
-                # which is then printed on the client side terminal.
                 message = clientSocket.recv(2048).decode()
 
                 if message == "CONN_CLOSED":
                     break
+
                 elif message == "NAME":
                     clientSocket.send(self.name.encode())
-                else:
-                    # insert messages to text box
-                    self.textCons.config(state = NORMAL)
-                    self.textCons.insert(END, message+"\n\n")
-                    self.textCons.config(state = DISABLED)
-                    self.textCons.see(END)
+                    continue
+
+                elif message == "CONN_SUCCESS":
+                    message = "Connection Successful!"
+
+                elif "$PTLUPDT" in message:
+                    l = message.split('$')[0].split(',')
+                    for i in l:
+                        chatParticipants.append(i)
+                    continue
+
+                elif "$PJOIN" in message:
+                    name = message.split("'")[1]
+                    if name not in chatParticipants:
+                        chatParticipants.append(name)
+                    message = message.split('$')[0]
+
+                elif "$PLEAVE" in message:
+                    name = message.split("'")[1]
+                    if name in chatParticipants:
+                        chatParticipants.remove(name)
+                    message = message.split('$')[0]
+
+                self.textCons.config(state = NORMAL)
+                self.textCons.insert(END, message+"\n\n")
+                self.textCons.config(state = DISABLED)
+                self.textCons.see(END)
+
+
             except:
-                print("An error occured!")
+                print("An error occured! - ", sys.exc_info())
                 break
 
         clientSocket.close()
