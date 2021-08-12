@@ -106,6 +106,8 @@ ping 0.tcp.ngrok.io
 
 Note that I haven't used the *tcp://* part of the domain name and neither the *:19171* while doin ping
 
+### Edit the client code
+
 Open the file client_gui.py and edit the line:
 ```
 server_host='127.0.0.1'
@@ -133,15 +135,15 @@ python client_gui.py 19171
 
 If you did everything alright then the application should run just fine.
 
-For trying out at your own end, open 2 different client connections, means run:
+For trying out at your own end, open 2 different client connections, i.e. run:
 ```
 python client_gui.py 12000
 ```
 two times on different terminals and enter with different names to be able to experience chat between 2 people.
 
-The application supports upto 15-20 client connections at a time. Not been tested for more than 20 connections.
+The application supports upto 10-15 client connections at a time. Not been tested for more than 20 connections.
 
-To chat with your friends, you run the server and do the port forwarding using ngrok and give the *client_gui.py* file to your friends and make them run it in their systems as explained in [Running the client](#running-the-client)
+To chat with your friends, you run the server and do the port forwarding using ngrok and give the [edited](#edit-the-client-code) *client_gui.py* file to your friends and make them run it in their systems as explained in [Running the client](#running-the-client)
 
 ## Built With
 
