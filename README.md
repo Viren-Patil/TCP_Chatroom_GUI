@@ -94,9 +94,9 @@ You should see the following after executing the above command:
 
 <img src="snapshots/ngrok.png">
 
-Observe the highlighted line. It says the access to *tcp://0.tcp.ngrok.io:19171* will be forwarded to *localhost:12000*
+Observe the highlighted line. It says the access to **tcp://0.tcp.ngrok.io:19171** will be forwarded to **localhost:12000**
 
-This basically means that when client will try to access *tcp://0.tcp.ngrok.io:19171* it will be forwarded to you system's *localhost:12000*
+This basically means that when client will try to access **tcp://0.tcp.ngrok.io:19171** it will be forwarded to you system's **localhost:12000**
 
 Open a terminal and run:
 ```
