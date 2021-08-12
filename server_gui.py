@@ -20,7 +20,7 @@ listOfActiveClients, listOfActiveClientNames = [], []
 
 def establish_connection():
 	print('The server is now active and listening on port ' + str(server_port))
-	server.listen(1) 
+	server.listen(10) 
 
 	while True: 
 		try:
