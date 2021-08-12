@@ -159,13 +159,16 @@ To chat with your friends, you run the server and do the port forwarding using n
 
 ## Snapshots of the application in use
 
-Enter your name that will be displayed to others in the chatroom
+Enter your name that will be displayed to others in the chatroom.
+
 <img src="snapshots/enter_name.png">
 
 Server terminal which shows who entered and who left the chat.
+
 <img src="snapshots/second_joined.png">
 
 Further pictures show the different features in the chat like being able to use some emojis and also able to view all the participants present in the chat.
+
 <img src="snapshots/1.png">
 <img src="snapshots/2.png">
 <img src="snapshots/3.png">
