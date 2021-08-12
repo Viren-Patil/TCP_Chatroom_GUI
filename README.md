@@ -8,11 +8,11 @@ Clone/Download the project from the repository. Navigate to the folder containin
 
 Terminal Window 1:
 ```
-> python server_gui.py <port-number>
+python server_gui.py <port-number>
 ```
 Terminal Window 2:
 ```
-> python client_gui.py <port-number>
+python client_gui.py <port-number>
 ```
 
 Make sure that the port numbers used in both the above commands are same. A different port number won't allow the client to get connected to the server. The port number should be entered without the angular brackets.
@@ -21,11 +21,11 @@ For example:
 
 Terminal Window 1:
 ```
-> python server_gui.py 12000
+python server_gui.py 12000
 ```
 Terminal Window 2:
 ```
-> python client_gui.py 12000
+python client_gui.py 12000
 ```
 
 Make sure you choose a port number that is free (i.e. not listening) on your system. Use *netstat* command to know which ports are open and can be used.
@@ -47,15 +47,15 @@ Tkinter comes along with Python 3.8 installation.
 
 To check if python has installed properly follow this:
 ```
->>> python --version
+python --version
 ```
 
 To check the version of Tkinter follow:
+
 Open terminal and open python interpreter. Execute the following.
 ```
->>> import tkinter
->>> tkinter.TkVersion
-8.6
+import tkinter
+tkinter.TkVersion
 ```
 
 ## Making sure everything is running properly
